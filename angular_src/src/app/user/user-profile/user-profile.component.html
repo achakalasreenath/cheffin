@@ -1,0 +1,103 @@
+<div class='container' style="display:flex;">
+  <div class="card" style='width: 100%; display:flex;'>
+    <h5 class="card-header">{{user.userFirstName}}&nbsp;{{user.userLastName}}&nbsp;&nbsp;&nbsp;<a [routerLink]="['/user/userlogin/true/userprofile/updatedetails']">Edit
+        Details</a></h5>
+    <img src="http://localhost:9090/api/user/getUserImage/{{user.userName}}" class="card-img-top" style="width:200px;margin:0px auto 0px auto;">
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">User&nbsp;Contact : {{user.userContact}}</li>
+        <li class="list-group-item">Cook&nbsp;Registered&nbsp;with :&nbsp;{{cookName}}<button type="button" class="btn btn-primary"
+            (click)="deRegisterCook()" style="margin-left:10px;">{{registerMessage}}</button></li>
+        <li class="list-group-item">Cook&nbsp;Rating :&nbsp;{{cookRating}}
+        </li>
+        <li class="list-group-item"> Your&nbsp;Rating :
+
+          <form #star="ngForm" class="rating" style="font-size: 25px; margin-left:10px;">
+            <label>
+              <input #first type="radio" name="stars" value="1" (change)='updateRating(first.value)' [(ngModel)]='user.userRating' />
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input #second type="radio" name="stars" value="2" (change)='updateRating(second.value)' [(ngModel)]='user.userRating' />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input #third type="radio" name="stars" value="3" (change)='updateRating(third.value)' [(ngModel)]='user.userRating' />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input #fourth type="radio" name="stars" value="4" (change)='updateRating(fourth.value)' [(ngModel)]='user.userRating' />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+            <label>
+              <input #fifth type="radio" name="stars" value="5" (change)='updateRating(fifth.value)' [(ngModel)]='user.userRating' />
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+              <span class="icon">★</span>
+            </label>
+          </form>
+
+        </li>
+        <li>
+          <form>
+            <div class="form-group">
+              <label for="userReviews">Give Review To {{cookName}}</label>
+              <textarea #review placeholder="Max 5 lines" class="form-control" id="userReviews" rows="5" name="review"
+                [(ngModel)]='userReview.review'></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="reviewMethod()" style="margin:0px 0px 30px 10px;">{{reviewMessage}}
+            </button>
+          </form>
+        </li>
+      </ul>
+      <button type="button" class="btn btn-primary" (click)="openModal(template)" style="margin-left:10px;">Upload
+        Image</button>
+      <button type="button" class="btn btn-primary" (click)="openModal(updateProfileImage)" style="margin-left:10px;">Update
+        Profile Image</button>
+      <button type="button" class="btn btn-primary" (click)="deactivateAccount()" style="margin-left:10px;">De-Activate
+        Account</button>
+      <!-- <h5 class="card-title">Food Type : {{cook.foodType[0]}}&nbsp;{{cook.foodType[1]}}&nbsp;{{cook.foodType[2]}}</h5> -->
+      <p class="card-text"></p>
+      <!--   <a (click)='sendRequest()' class="btn btn-primary">Go somewhere</a> -->
+    </div>
+  </div>
+
+</div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Upload Profile Photo</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" style="display:inline-block; margin:0px 0px 0px 30px">
+      <label>Upload Profile Image</label>
+      <input id='profileImage' name="profileImage" type="file" class="form-control-file" (change)="selectFile($event)">
+      <button type="button" class="btn btn-primary" (click)="onProfileFileChanged()">Upload Image</button>
+    </div>
+  </div>
+</ng-template>
+<ng-template #updateProfileImage>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Upload Profile Photo</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" style="display:inline-block; margin:0px 0px 0px 30px">
+      <label>Upload Profile Image</label>
+      <input id='updateProfileImage' name="recipeImage" type="file" class="form-control-file" (change)="selectFile($event)">
+      <button type="button" class="btn btn-primary" (click)="onProfileImageUpdated()">Update Profile Image</button>
+    </div>
+  </div>
+</ng-template>

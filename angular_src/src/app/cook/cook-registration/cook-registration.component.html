@@ -1,0 +1,221 @@
+<div class='container' style='font-weight:bold;'>
+  <h2>Cook Registration</h2>
+  <form #form="ngForm">
+
+
+    <div id='userNameDiv' class='form-group' style = "display :inline-block;width :300px;">
+      <label class='control-label'>Create UserName</label>
+      <input #userName="ngModel" class="form-control" required type="text" placeholder="Name" name='username'
+        [(ngModel)]='cook.userName'>
+
+      <div class="alert alert-danger" role='alert' *ngIf='userName.invalid && userName.touched'>
+        UserName is Required
+      </div>
+    </div>
+    <div id='emailDiv' class='form-group'>
+      <label class='control-label'>Email Id</label>
+      <input #emailId='ngModel' class="form-control" required type="email" name="Email" placeholder="example@email.com"
+        [(ngModel)]='cook.cookEmail'>
+      <div class="alert alert-danger" role='alert' *ngIf='emailId.touched  && emailId.invalid'>
+        Email is Required
+      </div>
+
+    </div>
+
+    <hr/>
+
+    <div id='firstNameDiv' class='form-group' [class.has-error]='firstName.invalid && firstName.touched'>
+      <label class='control-label'>Name</label>
+      <input #firstName="ngModel" class="form-control" required type="text" placeholder="Name" name='firstname'
+        [(ngModel)]='cook.cookFirstName'>
+
+      <div class="alert alert-danger" role='alert' *ngIf='firstName.invalid && firstName.touched'>
+        First Name is Required
+      </div>
+    </div>
+
+
+    <div id='lastNameDiv' class='form-group'>
+      <label class='control-label'>Last Name</label>
+      <input #secondName='ngModel' class="form-control" required type="text" placeholder="LastName" name='lastname'
+        [(ngModel)]='cook.cookLastName'>
+      <div class="alert alert-danger" role='alert' *ngIf='secondName.invalid && secondName.touched'>
+        Second Name is Required
+      </div>
+
+    </div>
+    <hr />
+    <div id='passwordDiv' class='form-group' style = "display :inline-block;width :300px;">
+      <label class='control-label'>Password</label>
+      <input #password='ngModel' class="form-control" required type="password" placeholder="Password" name='password'
+        [(ngModel)]='cook.password'>
+      <div class="alert alert-danger" role='alert' *ngIf='password.invalid && password.touched'>
+        Password is Required
+      </div>
+
+    </div>
+
+    <div id='confirmPasswordDiv' class='form-group' style = "display :inline-block;width :300px; margin: 0px 0px 0px 80px">
+      <label class='control-label'>Confirm Password</label>
+      <input #confirmPassword='ngModel' class="form-control" required type="password" placeholder="Confirm Password"
+        name='confirm-password' (change)='checkPassword()' [(ngModel)]='confirmPasswordMatched'>
+      <div class="alert alert-danger" role='alert' *ngIf='isPasswordMatched  && confirmPassword.touched'>
+        Password doesn't match
+      </div>
+    </div>
+    
+   
+    
+
+    <!-- <div id='aadhaarDiv' class='form-group'>
+      <label class='control-label'>12 Digit Aadhaar Number</label>
+      <input #aadhaar="ngModel" name='aadhaar' class="form-control" required type="text" placeholder="----/----/----"
+        [(ngModel)]='cook.cookAadhaar'>
+    </div> -->
+<hr/>
+   
+
+    <div class="form-group" style = "display :inline-block;width :300px;">
+      <label class='control-label'>Gender</label>
+      <select #cookGender="ngModel" name="gender" required class="form-control" [(ngModel)]='cook.cookGender'>
+        <option value='default'>Select your Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+
+    </div>
+
+   <!--  <div id='ageDiv' class='form-group'>
+      <label class='control-label'>Age in years</label>
+      <input #age="ngModel" class="form-control" name="age" required type="text" placeholder="Ex:22" [(ngModel)]='cook.cookAge'>
+
+      <div class="alert alert-danger" role='alert' *ngIf='age.invalid && age.touched'>
+        Age is Required
+      </div>
+    </div> -->
+
+    <div class="form-group" style = "display :inline-block;width :300px;  margin: 0px 0px 0px 80px">
+      <label class='control-label'>Category</label>
+      <select #cookCategory="ngModel" required name="category" class="form-control" [(ngModel)]='cook.cookCategory'>
+        <option value='default'>Select your Category</option>
+        <option>Vegetarian</option>
+        <option>Non-Vegetarian</option>
+        <option>Vegetarian and Non-Vegetarian</option>
+      </select>
+      <!-- <div class="alert alert-danger" role='alert' *ngIf='cookCategory.touched'>
+          Category is Required
+        </div> -->
+    </div>
+<hr/>
+    <div class="form-group" style='display:inline-block; width:300px;'>
+      <label class='control-label'>Location</label>
+      <select #locationSelect required class="form-control" name='location' (blur)='hasLocationErrorMethod(locationSelect.value)'
+        (change)='hasLocationErrorMethod(locationSelect.value)' [(ngModel)]='cook.cookLocation'>
+        <option value='default'>Select a Location</option>
+        <option *ngFor='let location of locations'>
+          {{location}}
+      </select>
+      <div class="alert alert-danger" role='alert' *ngIf='hasLocationError'>
+        Location is Required
+      </div>
+    </div>
+
+    <div id='feeDiv' class='form-group'>
+      <label class='control-label'>Pay Per Month</label>
+      <input #pay='ngModel' class="form-control" required type="text" placeholder="In Rupees" name='cookFeePerMonth'
+        [(ngModel)]='cook.cookFeePerMonth'>
+      <div class="alert alert-danger" role='alert' *ngIf='pay.invalid && pay.touched'>
+        This field is required
+      </div>
+
+    </div>
+<hr/>
+    <!-- <div class="form-group">
+      <label #currentAddress>Current Address</label>
+      <textarea #currentAddress name="current-address" class="form-control" rows="5" [(ngModel)]='cook.currentAddress'></textarea>
+    </div>
+
+    <div class="form-group">
+      <label> Permanent Address</label>
+      <textarea #permanentAddress="ngModel" name="permanent-address" class="form-control" rows="5" [(ngModel)]='cook.permanentAddress'
+        required></textarea>
+      <div class="alert alert-danger" role='alert' *ngIf='permanentAddress.touched && permanentAddress.invalid'>
+        Permanent Address is Required
+      </div>
+    </div> -->
+
+    <h6 style = "margin-top :10px;">Languages</h6>
+    <div #languages>
+      <div class="checkbox" style='display:inline-block;' >
+        <label>
+          <input type='checkbox' name='English' (click)='toggleIsEnglish()'>
+          English
+        </label>
+      </div>
+
+      <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+        <label>
+          <input type='checkbox' name='Hindi' (click)='toggleIsHindi()' >
+          Hindi
+        </label>
+      </div>
+
+      <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+        <label>
+          <input type='checkbox' name='Telugu' (click)='toggleIsTelugu()' >Telugu
+        </label>
+      </div>
+      <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+        <label>
+          <input type='checkbox' name='Tamil' (click)='toggleIsTamil()' >Tamil
+        </label>
+      </div>
+      <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+        <label>
+          <input type='checkbox' name='Kannada' (click)='toggleIsKannada()' >Kannada
+        </label>
+      </div>
+    </div>
+
+    <h6 style = "margin-top :10px;">Food Type</h6>
+
+    <div class="checkbox" style='display:inline-block;'>
+      <label>
+        <input type='checkbox' name='SouthIndian' (change)='toggleIsSouthIndian()' >South
+        Indian
+      </label>
+    </div>
+
+    <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+      <label>
+        <input type='checkbox' name='NorthIndian' (change)=' toggleIsNorthIndian()' >North
+        Indian
+      </label>
+    </div>
+
+    <div class="checkbox" style='display:inline-block; margin:0px 0px 0px 30px;'>
+      <label>
+        <input type='checkbox' name='Chinese' (change)='toggleIsChinese()'>Chinese
+      </label>
+    </div>
+
+   
+    <hr />
+  
+
+
+    <div id='contactDiv' class='form-group'>
+      <label class='control-label'>Mobile Number</label>
+      <input #mobile='ngModel' class="form-control" required type="text" placeholder="Mobile" name='cook-contact'
+        [(ngModel)]='cook.cookContact'>
+      <div class="alert alert-danger" role='alert' *ngIf='mobile.invalid && mobile.touched'>
+        Mobile is Required
+      </div>
+
+    </div>
+
+    <hr />
+    <button class='btn btn-primary' type='submit' (click)='submit()' [disabled]='form.invalid'>Submit</button>
+  </form>
+</div>

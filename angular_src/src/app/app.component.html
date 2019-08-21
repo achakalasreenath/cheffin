@@ -1,0 +1,49 @@
+<div class='body'>
+  <!--     style =' background-image:url(https://st.depositphotos.com/1193856/1289/i/950/depositphotos_12892892-stock-photo-cook-icon-on-old-paper.jpg)'
+ -->
+  <div class="sample-wrapper drop-down-wrapper">
+    <igx-navbar title="Cheffin" actionButtonIcon="menu" (click)="drawer.toggle()" [isActionButtonVisible]="true" style="width:100%;display:flex;">
+
+      <input #search="ngModel" class="form-control" required type="text" placeholder="search" name='search' [(ngModel)]='searchQuery'
+        (click)='drawer.toggle()'>
+      <igx-icon (click)='drawer.toggle()'>search</igx-icon>
+      <a [routerLink]="messageroute" (click)='drawer.toggle()'>
+        <p style="text-align:center; width : 150px;color:black;">{{welcomeMessage}}</p>
+      </a>
+      <igx-icon #menu_icon id='dropdownMenuLink' (click)='toggleDropDown($event)' tabindex="0">more_vert</igx-icon>
+      <div #menu class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <igx-drop-down #dropdown2 (onSelection)="onSelection($event)">
+
+          <a [routerLink]='route'>
+            <igx-drop-down-item>
+              <div>{{ loginMessage }}</div>
+            </igx-drop-down-item>
+          </a>
+        </igx-drop-down>
+      </div>
+
+    </igx-navbar>
+
+  </div>
+
+  <div class="content-wrap" style="width: 100%; height: 100%; display: flex; ">
+
+    <igx-nav-drawer id="navigation" #drawer [isOpen]="false">
+      <ng-template igxDrawer >
+        <nav>
+          <a [routerLink]="['/home']"> <span igxDrawerItem>Home</span></a>
+          <a [routerLink]="['/user',userRegistrationRouteParameter]"><span igxDrawerItem igxRipple> User</span></a>
+          <a [routerLink]="['/cook/',cookRegistrationRouteParameter]"><span igxDrawerItem igxRipple> Cook </span></a>
+        </nav>
+      </ng-template>
+    </igx-nav-drawer>
+    <main>
+      <span igxButton="icon" igxToggleAction="navigation">
+        <igx-icon fontSet="material"></igx-icon>
+      </span>
+
+    </main>
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

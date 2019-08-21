@@ -1,0 +1,73 @@
+<div>
+    <div class='container' style='margin: 30px auto 0px auto;'>
+        <div id='searchByNameDiv' class='form-group' style='display:inline-block;'>
+            <label class='control-label'>Search By Name</label>
+            <input #searchByName="ngModel" class="form-control" required type="text" placeholder="search" name='search'
+                [(ngModel)]='searchQuery'>
+        </div>
+
+
+        <div class="form-group" style='display:inline-block; margin : 0px 0px 0px 15px;'>
+            <label class='control-label'>Location</label>
+            <select #locationSelect required class="form-control" name='location' (change)='locationOrPriceEntered()'
+                [(ngModel)]='locationEntered'>
+                <option value='default'>Select a Location</option>
+                <option *ngFor='let location of locations'>
+                    {{location}}
+            </select>
+        </div>
+
+        <div class="form-group" style='display:inline-block; margin : 0px 0px 0px 15px;'>
+            <label class='control-label'>Price</label>
+            <select #locationSelect required class="form-control" name='price' (change)='locationOrPriceEntered()'
+                [(ngModel)]='price'>
+                <option value='0'>Select a Price</option>
+                <option *ngFor='let price of prices'>
+                    &lt;&nbsp;{{price}}
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class='container'>
+        <div class="card" style="width: 18px;" *ngFor='let cook of filteredCooks' style='display:inline-block; margin:15px 15px 30px 0px; width:200px;'>
+            <a [routerLink]="['/cookprofile',cook.userName]"><img src="http://localhost:9090/api/cook/getCookImage/{{cook.userName}}"
+                    class="card-img-top" style="width: auto !important;
+                    height: 200px !important;
+                    margin: 0 auto 1em auto;"></a>
+            <div class="card-body">
+                <span class="card-text" style='font-size:15px; font-weight: bold'>{{cook.cookFirstName}},&nbsp;
+                    {{cook.cookGender}}</span><br />
+                <span class="card-text" style='font-size:15px;'>{{cook.cookAge}}years,&nbsp;{{cook.Contact}}</span><br />
+                <span class="card-text" style='font-size:15px;font-weight: bold'>{{cook.cookLocation}},&nbsp;
+                    ₹{{cook.cookFeePerMonth}}/month</span><br />
+                <span class="card-text" style='font-size:15px;'>Rating :{{cook.cookRating}}</span>
+            </div>
+        </div>
+
+        <!--   <igx-card>
+      <igx-card-header class="compact">
+          <igx-avatar src="https://images.fineartamerica.com/images-medium-large-5/chef-cook-holding-pot-retro-aloysius-patrimonio.jpg" roundShape="true"></igx-avatar>
+          <div class="igx-card-header__tgroup">
+              <h3 class="igx-card-header__title--small">Brad Stanley</h3>
+              <h5 class="igx-card-header__subtitle">Audi AG</h5>
+          </div>
+      </igx-card-header>
+      <div style="overflow: hidden">
+          <img width="100%" height="100%" src="https://images.fineartamerica.com/images-medium-large-5/chef-cook-holding-pot-retro-aloysius-patrimonio.jpg">
+      </div>
+      <igx-card-actions >
+          <div class="igx-card-actions__igroup--start">
+              <span igxButton="icon" igxRipple igxRippleCentered="true" *ngFor="let icon of icons">
+                  <igx-icon fontSet="material">{{icon}}</igx-icon>
+              </span>
+          </div>
+          <button igxButton igxRipple >Follow</button>
+      </igx-card-actions>
+  </igx-card> -->
+
+
+
+    </div>
+</div>

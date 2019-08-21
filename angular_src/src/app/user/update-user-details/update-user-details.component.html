@@ -1,0 +1,92 @@
+<body style='padding-bottom:500px;'>
+  <!--     background-image:url(https://st.depositphotos.com/1193856/1289/i/950/depositphotos_12892892-stock-photo-cook-icon-on-old-paper.jpg); 
+ -->
+  <div class='container' style='font-weight:bold;'>
+    <h2>Update Details</h2>
+    <form #userUpdateForm="ngForm">
+
+
+      <div id='userNameDiv' class='form-group'>
+        <label class='control-label'>Username</label>
+        <input #userName="ngModel" class="form-control" required type="text" placeholder="example@gmail.com" name='userName'
+          [(ngModel)]='user.userName'>
+
+        <div class="alert alert-danger" role='alert' *ngIf='userName.invalid && userName.touched'>
+          Username is Required
+        </div>
+      </div>
+
+
+      <div id='firstNameDiv' class='form-group'>
+        <label class='control-label'>First Name</label>
+        <input #firstName="ngModel" class="form-control" required type="text" placeholder="First Name" name='firstName'
+          [(ngModel)]='user.userFirstName'>
+
+        <div class="alert alert-danger" role='alert' *ngIf='firstName.invalid && firstName.touched'>
+          First Name is Required
+        </div>
+      </div>
+
+
+      <div id='lastNameDiv' class='form-group'>
+        <label class='control-label'>Last Name</label>
+        <input #lastName="ngModel" class="form-control" required type="text" placeholder="Last Name" name='lastName'
+          [(ngModel)]='user.userLastName'>
+
+        <div class="alert alert-danger" role='alert' *ngIf='lastName.invalid && lastName.touched'>
+          Last Name is Required
+        </div>
+      </div>
+
+
+      <div id='passwordDiv' class='form-group'>
+        <label class='control-label'>Password</label>
+        <input #password='ngModel' class="form-control" required type="password" placeholder="Password" name='password'
+          [(ngModel)]='user.password'>
+        <div class="alert alert-danger" role='alert' *ngIf='password.invalid && password.touched'>
+          Password is Required
+        </div>
+
+      </div>
+
+      <div id='confirmPasswordDiv' class='form-group'>
+        <label class='control-label'>Confirm Password</label>
+        <input #confirmPassword='ngModel' class="form-control" required type="password" placeholder="Confirm Password"
+          name='confirm-password' (change)='checkPassword()' [(ngModel)]='confirmPasswordMatched'>
+        <div class="alert alert-danger" role='alert' *ngIf='isPasswordMatched  && confirmPassword.touched'>
+          Password doesn't match
+        </div>
+
+      </div>
+
+      <hr />
+
+      <div id='userEmailDiv' class='form-group'>
+        <label class='control-label'>Email Address</label>
+        <input #email="ngModel" class="form-control" required type="email" placeholder="example@gmail.com" name='email'
+          [(ngModel)]='user.userEmail'>
+
+        <div class="alert alert-danger" role='alert' *ngIf='email.invalid && email.touched'>
+          Email is Required
+        </div>
+      </div>
+
+
+      <div id='userContact' class='form-group'>
+        <label class='control-label'>Contact</label>
+        <input #userContact="ngModel" class="form-control" required type="text" placeholder="Mobile No." name='userContact'
+          [(ngModel)]='user.userContact'>
+
+        <div class="alert alert-danger" role='alert' *ngIf='userContact.invalid && userContact.touched'>
+          Mobile Number is Required
+        </div>
+      </div>
+
+
+      <button class='btn btn-primary' type='submit' (click)='submit()' [disabled]='userUpdateForm.invalid'>Submit</button>
+    </form>
+  </div>
+  <div *ngIf='successMessage'>
+    <p>{{successMessage}}</p>
+  </div>
+</body>

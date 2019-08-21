@@ -1,0 +1,37 @@
+#firstNameDiv{
+    display:inline-block;
+    width:300px;
+}
+
+
+#lastNameDiv{
+    display:inline-block;
+    margin:0px 0px 0px 80px;
+    width:300px;
+}
+#foodTypeDiv{
+    display:inline-block;
+}
+#genderDiv{
+    display:inline-block;
+    width:300px;
+}
+#feeDiv{
+    display:inline-block;
+    width:300px;
+    margin:0px 0px 0px 80px;
+}
+#contactDiv{
+    display:inline-block;
+    width:300px;
+}
+#emailDiv{
+    display:inline-block;
+    width:300px;
+    margin:0px 0px 0px 80px;
+}
+
+
+
+
+
